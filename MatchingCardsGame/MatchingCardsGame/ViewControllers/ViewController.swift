@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     // MARK: - IBOutlets
 
     @IBOutlet var cardsContainerCollectionview: UICollectionView!
@@ -48,5 +48,27 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         cell.configure(with: currentViewModel)
 
         return cell
+    }
+    
+    /** Distance between item cells */
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
+    
+    /** Cell Margin */
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+    }
+    
+    /** When tapping a card in the deck */
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Get the selected cell
+        if let cell = collectionView.cellForItem(at: indexPath) as? CardCell {
+            // get the corresponding view model
+            let currentViewModel = self.viewModel.cards[indexPath.row]
+            
+            // Perform the flip animation
+            cell.animateRotation(isFaceUp: currentViewModel.card.isFaceUp)
+        }
     }
 }
