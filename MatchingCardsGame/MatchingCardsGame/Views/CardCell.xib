@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CardCell" id="gTV-IL-0wX" customClass="CardCell" customModule="MatchingCardsGame" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="120"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="80" height="120"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ijN-Ub-cTh">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="120"/>
+                        <color key="backgroundColor" red="0.58161147599367746" green="0.10195136055421812" blue="0.19515965488973952" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="120" id="meM-xr-Khe"/>
+                            <constraint firstAttribute="width" constant="80" id="pry-Ly-1HW"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="16"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bsT-7M-isd">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="120"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="globe.europe.africa.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="THO-d3-Kba">
+                                <rect key="frame" x="20" y="40.333333333333343" width="40" height="40.000000000000014"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="ois-I8-WG3"/>
+                                    <constraint firstAttribute="height" constant="41.329999999999998" id="xcv-GR-aBj"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="THO-d3-Kba" firstAttribute="centerX" secondItem="bsT-7M-isd" secondAttribute="centerX" id="65f-8q-a03"/>
+                            <constraint firstAttribute="height" constant="120" id="9dB-dA-C6d"/>
+                            <constraint firstAttribute="width" constant="80" id="FfY-Vo-RQ9"/>
+                            <constraint firstItem="THO-d3-Kba" firstAttribute="centerY" secondItem="bsT-7M-isd" secondAttribute="centerY" id="eDK-rN-t5V"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="16"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="bsT-7M-isd" secondAttribute="trailing" id="0qG-Pd-GB1"/>
+                <constraint firstItem="ijN-Ub-cTh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7fX-aL-lnz"/>
+                <constraint firstAttribute="bottom" secondItem="ijN-Ub-cTh" secondAttribute="bottom" id="9RH-YI-CG3"/>
+                <constraint firstAttribute="trailing" secondItem="ijN-Ub-cTh" secondAttribute="trailing" id="FKp-gn-h7c"/>
+                <constraint firstItem="ijN-Ub-cTh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="MLT-rv-0Ll"/>
+                <constraint firstItem="bsT-7M-isd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="MzS-V2-ojo"/>
+                <constraint firstItem="bsT-7M-isd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="d6s-OZ-gw4"/>
+                <constraint firstAttribute="bottom" secondItem="bsT-7M-isd" secondAttribute="bottom" id="iCS-JD-Xhs"/>
+            </constraints>
+            <size key="customSize" width="215" height="204"/>
+            <connections>
+                <outlet property="cardBackView" destination="ijN-Ub-cTh" id="euC-WI-kzf"/>
+                <outlet property="cardFrontView" destination="bsT-7M-isd" id="AsY-RE-SBT"/>
+                <outlet property="symbolImageView" destination="THO-d3-Kba" id="nLU-lS-B9U"/>
+            </connections>
+            <point key="canvasLocation" x="139.69465648854961" y="42.95774647887324"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="globe.europe.africa.fill" catalog="system" width="128" height="123"/>
+    </resources>
+</document>

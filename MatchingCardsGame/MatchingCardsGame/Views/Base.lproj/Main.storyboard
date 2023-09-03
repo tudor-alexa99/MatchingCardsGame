@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bzh-lH-Ff2">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
@@ -10,16 +10,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Matching Pairs-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MatchingCardsGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zvh-3b-tGy">
-                                <rect key="frame" x="32" y="135" width="329" height="611"/>
+                                <rect key="frame" x="32" y="167" width="350" height="623"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iOa-wd-siX">
                                     <size key="itemSize" width="128" height="128"/>
@@ -39,35 +39,45 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hvN-bG-RsJ">
-                                <rect key="frame" x="121.66666666666669" y="778" width="150" height="40"/>
+                                <rect key="frame" x="132" y="822" width="150" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="Fs0-af-RmI"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="Fs0-af-RmI"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Zg1-7W-GTP"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Button"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p70-ca-Png">
+                                <rect key="frame" x="32" y="108" width="350" height="27"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="p70-ca-Png" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="3Fa-V7-TtJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Zvh-3b-tGy" secondAttribute="trailing" constant="32" id="3Sf-1y-qyj"/>
-                            <constraint firstItem="Zvh-3b-tGy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="85l-aa-pIe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="p70-ca-Png" secondAttribute="trailing" constant="32" id="NtP-iv-Y5q"/>
+                            <constraint firstItem="Zvh-3b-tGy" firstAttribute="top" secondItem="p70-ca-Png" secondAttribute="bottom" constant="32" id="XEH-fF-yNl"/>
                             <constraint firstItem="hvN-bG-RsJ" firstAttribute="top" secondItem="Zvh-3b-tGy" secondAttribute="bottom" constant="32" id="Xwm-vD-Tzh"/>
+                            <constraint firstItem="p70-ca-Png" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="mNh-l3-CIX"/>
                             <constraint firstItem="hvN-bG-RsJ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="qbi-iP-FYr"/>
                             <constraint firstItem="Zvh-3b-tGy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="uUx-qa-G33"/>
                             <constraint firstItem="hvN-bG-RsJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xB8-j0-ALz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="w33-2U-gNM"/>
+                    <navigationItem key="navigationItem" title="Matching Pairs" id="w33-2U-gNM"/>
                     <connections>
                         <outlet property="actionButton" destination="hvN-bG-RsJ" id="My5-zf-33J"/>
                         <outlet property="cardsContainerCollectionview" destination="Zvh-3b-tGy" id="hCV-yW-ff9"/>
+                        <outlet property="scoreLabel" destination="p70-ca-Png" id="yDP-dI-zMg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057.2519083969464" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="1056.5217391304348" y="-28.125"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SGF-CD-c9V">
@@ -75,7 +85,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bzh-lH-Ff2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Obc-eo-sj1">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
