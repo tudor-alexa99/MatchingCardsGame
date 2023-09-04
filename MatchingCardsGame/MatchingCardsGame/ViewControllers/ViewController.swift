@@ -13,7 +13,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet var cardsContainerCollectionview: UICollectionView!
     @IBOutlet var actionButton: UIButton!
     @IBOutlet var scoreLabel: UILabel!
-
+    @IBAction func buttonTappedAction(_ sender: Any) {
+        self.viewModel.resetAllCardsAndShuffle()
+        self.cardsContainerCollectionview.reloadData()
+    }
     // MARK: - Variables
 
     var viewModel: CardGameViewModel = CardGameViewModel()
@@ -30,6 +33,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         // register custom card cell
         cardsContainerCollectionview.register(UINib(nibName: "CardCell", bundle: nil), forCellWithReuseIdentifier: "CardCell")
     }
+    // MARK: - Private
+    
 
     // MARK: - Collection View Stubs
 
@@ -70,8 +75,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             // if the card is already matched, return
             guard currentViewModel.card.isMatched == false else { return }
             
+            let isFaceUp = currentViewModel.card.isFaceUp
+            
             // Perform the flip animation
-            cell.animateRotation(isFaceUp: currentViewModel.card.isFaceUp)
+            cell.animateRotation(isFaceUp: isFaceUp)
+            
             viewModel.choose(card: currentViewModel)
         }
     }

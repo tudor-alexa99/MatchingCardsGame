@@ -35,8 +35,8 @@ class CardGameViewModel {
 
         // if this is the first selected card, save it and continue
         if firstSelectedCard == nil {
+            card.card.isFaceUp = true
             firstSelectedCard = card
-            firstSelectedCard?.card.isFaceUp = true
             return
         }
         
@@ -51,7 +51,7 @@ class CardGameViewModel {
         if firstSelectedCard!.card.imageName == card.card.imageName {
             self.matchingCards(firstCardVM: firstSelectedCard!, secondCardVM: card)
         } else {
-            
+            flipAllUnmatchedCardsBack()
         }
     }
 
@@ -64,6 +64,16 @@ class CardGameViewModel {
                 cardVM.card.isFaceUp = false
             }
         }
+    }
+    
+    /** Reverse all the cards */
+    func resetAllCardsAndShuffle() {
+        for cardVM in cards {
+            cardVM.card.isMatched = false
+            cardVM.card.isFaceUp = false
+        }
+        
+        cards.shuffle()
     }
 
     // MARK: - Private

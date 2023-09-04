@@ -23,17 +23,15 @@ class CardCell: UICollectionViewCell {
 
     func configure(with viewModel: CardViewModel) {
         // if the card is face down, rotate the card backwords
-        if viewModel.card.isFaceUp {
-            cardBackView.layer.zPosition = 0
-            cardFrontView.layer.zPosition = 1
-        } else {
-            cardBackView.layer.zPosition = 1
-            cardFrontView.layer.zPosition = 0
-        }
+        cardBackView.isHidden = viewModel.card.isFaceUp
+        cardFrontView.isHidden = !viewModel.card.isFaceUp
         
     }
 
     func animateRotation(isFaceUp: Bool) {
+        // show both sides of the card
+        cardBackView.isHidden = false
+        cardFrontView.isHidden = false
         
         // Check if the card is currently face up or face down
         let fromView = isFaceUp ? cardFrontView : cardBackView
