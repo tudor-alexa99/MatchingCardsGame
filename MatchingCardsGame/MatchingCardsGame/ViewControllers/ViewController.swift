@@ -38,6 +38,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         // setup the callback handles
         viewModel.flipCardCallback = flipCardsOnDeckAnimation
         viewModel.updateCountdownLabelCallback = updateCountdownLabel
+        viewModel.updateScoreCallback = updateScoreLabel
 
         // start the countdown
         viewModel.startCountdown()
@@ -103,5 +104,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     func updateCountdownLabel(with time: TimeInterval) {
         timeLabel.text = String(format: "%.0f seconds", time)
+    }
+    
+    func updateScoreLabel(with score: Int) {
+        scoreLabel.text = "Score: \(score)"
     }
 }

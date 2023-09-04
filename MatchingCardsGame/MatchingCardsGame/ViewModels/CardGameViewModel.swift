@@ -14,8 +14,15 @@ class CardGameViewModel {
     var firstSelectedCard: Int?
     var flipCardCallback: ((Int, Bool) -> Void)?
     var updateCountdownLabelCallback:((TimeInterval) -> Void)?
+    var updateScoreCallback:((Int) -> Void)?
     var isCountdownRunning: Bool = false
     var countdownTimer: Timer?
+    var correctStreak = 1 // will be used to count how many correct in a row there will be
+    var totalScore = 0 {
+        didSet {
+            updateScoreCallback?(totalScore)
+        }
+    }
     var remainingTime: TimeInterval = 60 {
         didSet {
             updateCountdownLabelCallback?(remainingTime)
@@ -51,6 +58,7 @@ class CardGameViewModel {
             card.isFaceUp = true
             firstSelectedCard = cardIndex
             flipCardCallback?(cardIndex, false)
+            correctStreak = 1
             return
         }
 
@@ -59,6 +67,7 @@ class CardGameViewModel {
             firstSelectedCard = nil
             card.isFaceUp = false
             flipCardCallback?(cardIndex, true)
+            correctStreak = 1
             return
         }
 
@@ -93,7 +102,11 @@ class CardGameViewModel {
 
     /** Reverse all the cards */
     func resetAllCardsAndShuffle() {
-        for cardVM in cards {
+        for cardIndice in cards.indices {
+            let cardVM = cards[cardIndice]
+            if cardVM.isFaceUp {
+                flipCardCallback?(cardIndice, true)
+            }
             cardVM.isMatched = false
             cardVM.isFaceUp = false
         }
@@ -111,6 +124,10 @@ class CardGameViewModel {
         firstCardVM.isMatched = true
         secondCardVM.isMatched = true
         firstSelectedCard = nil
+        
+        // add 2 points for each matched card, and multiply by streak
+        totalScore += correctStreak * 2
+        correctStreak += 1
     }
 
     /** Not matching pair logic */
