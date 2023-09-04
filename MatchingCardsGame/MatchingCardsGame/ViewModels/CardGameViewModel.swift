@@ -8,11 +8,21 @@
 import Foundation
 
 class CardGameViewModel {
+    // MARK: - Variables
+
     var cards: [CardViewModel]
     var firstSelectedCard: Int?
     var flipCardCallback: ((Int, Bool) -> Void)?
+    var updateCountdownLabelCallback:((TimeInterval) -> Void)?
+    var isCountdownRunning: Bool = false
+    var countdownTimer: Timer?
+    var remainingTime: TimeInterval = 60 {
+        didSet {
+            updateCountdownLabelCallback?(remainingTime)
+        }
+    }
 
-    // MARK: Initializers
+    // MARK: - Initializers
 
     init() {
         cards = []
@@ -63,8 +73,9 @@ class CardGameViewModel {
             matchingCards(firstCardVM: firstCard, secondCardVM: card)
         } else {
             firstSelectedCard = nil
-
-            flipAllUnmatchedCardsBack()
+            DispatchQueue.main.async {
+                self.flipAllUnmatchedCardsBack()
+            }
         }
     }
 
@@ -108,5 +119,30 @@ class CardGameViewModel {
         firstSelectedCard = nil
     }
 
-    /** Compute points */
+    // MARK: - Timer + Countdown
+
+    /** Create and start a new countdown */
+    func startCountdown() {
+        isCountdownRunning = true
+
+        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+            guard let self = self else { return }
+
+            // decrease the time each second
+            if self.remainingTime > 0 {
+                self.remainingTime -= 1
+            } else {
+                // stop the timer
+                timer.invalidate()
+                self.isCountdownRunning = false
+                // TODO: change method to Game Over
+                self.resetAllCardsAndShuffle()
+            }
+        }
+    }
+
+    func stopCountdown() {
+        countdownTimer?.invalidate()
+        isCountdownRunning = false
+    }
 }

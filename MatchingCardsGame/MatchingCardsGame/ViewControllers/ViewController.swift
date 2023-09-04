@@ -13,6 +13,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet var cardsContainerCollectionview: UICollectionView!
     @IBOutlet var actionButton: UIButton!
     @IBOutlet var scoreLabel: UILabel!
+    @IBOutlet var timeLabel: UILabel!
     @IBAction func buttonTappedAction(_ sender: Any) {
         viewModel.resetAllCardsAndShuffle()
         cardsContainerCollectionview.reloadData()
@@ -33,9 +34,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
         // register custom card cell
         cardsContainerCollectionview.register(UINib(nibName: "CardCell", bundle: nil), forCellWithReuseIdentifier: "CardCell")
-        
-        // setup the callback handle
+
+        // setup the callback handles
         viewModel.flipCardCallback = flipCardsOnDeckAnimation
+        viewModel.updateCountdownLabelCallback = updateCountdownLabel
+
+        // start the countdown
+        viewModel.startCountdown()
     }
 
     // MARK: - Private
@@ -83,19 +88,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     /** When tapping a card in the deck */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Get the selected cell
-        if let cell = collectionView.cellForItem(at: indexPath) as? CardCell {
+        if collectionView.cellForItem(at: indexPath) is CardCell {
             // get the corresponding view model
             let currentViewModel = viewModel.cards[indexPath.row]
 
             // if the card is already matched, return
             guard currentViewModel.isMatched == false else { return }
 
-            let isFaceUp = currentViewModel.isFaceUp
-
-            // Perform the flip animation
-//            cell.animateRotation(isFaceUp: isFaceUp)
-
             viewModel.choose(cardIndex: indexPath.row)
         }
+    }
+
+    // MARK: - Countdown logic
+
+    func updateCountdownLabel(with time: TimeInterval) {
+        timeLabel.text = String(format: "%.0f seconds", time)
     }
 }
