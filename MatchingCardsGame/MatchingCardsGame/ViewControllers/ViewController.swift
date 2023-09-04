@@ -14,9 +14,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet var actionButton: UIButton!
     @IBOutlet var scoreLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
+    @IBOutlet var gameOverLabel: UILabel!
     @IBAction func buttonTappedAction(_ sender: Any) {
-        viewModel.resetAllCardsAndShuffle()
-        cardsContainerCollectionview.reloadData()
+        if viewModel.hasGameStarted {
+            resetGame()
+        } else {
+            startGame()
+        }
     }
 
     // MARK: - Variables
@@ -40,8 +44,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         viewModel.updateCountdownLabelCallback = updateCountdownLabel
         viewModel.updateScoreCallback = updateScoreLabel
 
-        // start the countdown
-        viewModel.startCountdown()
+        if !viewModel.hasGameStarted {
+            actionButton.titleLabel?.text = "Start game"
+        }
+        
+        // hide the game over label
+        gameOverLabel.isHidden = true
     }
 
     // MARK: - Private
@@ -55,6 +63,39 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             // Call the method on the cell
             cell.animateRotation(isFaceUp: isFacingUp)
         }
+    }
+
+    private func startGame() {
+        // start the countdown timer
+        viewModel.startCountdown()
+        viewModel.hasGameStarted = true
+        actionButton.setTitle("Reset Game", for: .normal)
+        
+        // hide the game over label and show the grid
+        gameOverLabel.isHidden = true
+        cardsContainerCollectionview.isHidden = false
+    }
+
+    private func resetGame() {
+        // reset all the values to the initial state
+        viewModel.resetAllCardsAndShuffle()
+        cardsContainerCollectionview.reloadData()
+        actionButton.setTitle("Start Game", for: .normal)
+        viewModel.stopCountdown()
+        viewModel.remainingTime = 60
+        viewModel.totalScore = 0
+        viewModel.hasGameStarted = false
+    }
+
+    private func endGame() {
+        // hide the collection view and show the Game Over message instead
+        cardsContainerCollectionview.isHidden = true
+        gameOverLabel.isHidden = false
+
+        // show the user his final score
+        gameOverLabel.text = "Game Over! Your final score is \(viewModel.totalScore)"
+        
+        actionButton.setTitle("Restart Game", for: .normal)
     }
 
     // MARK: - Collection View Stubs
@@ -88,6 +129,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     /** When tapping a card in the deck */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard viewModel.hasGameStarted == true else { return }
+        
         // Get the selected cell
         if collectionView.cellForItem(at: indexPath) is CardCell {
             // get the corresponding view model
@@ -104,8 +147,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     func updateCountdownLabel(with time: TimeInterval) {
         timeLabel.text = String(format: "%.0f seconds", time)
+        // if you ran out of time, end the game
+        if time == 0 {
+            endGame()
+        }
     }
-    
+
     func updateScoreLabel(with score: Int) {
         scoreLabel.text = "Score: \(score)"
     }

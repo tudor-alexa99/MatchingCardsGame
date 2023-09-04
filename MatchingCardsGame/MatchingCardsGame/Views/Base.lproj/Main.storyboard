@@ -45,7 +45,9 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Zg1-7W-GTP"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title=" - ">
+                                    <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="buttonTappedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7xt-07-fpx"/>
                                 </connections>
@@ -67,15 +69,23 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Over!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yap-Vr-Fwa">
+                                <rect key="frame" x="161.5" y="438" width="91" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="yap-Vr-Fwa" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="1hP-2T-Cnm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Zvh-3b-tGy" secondAttribute="trailing" constant="32" id="3Sf-1y-qyj"/>
                             <constraint firstItem="8s8-ST-NX6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="7tC-18-4EU"/>
                             <constraint firstItem="8s8-ST-NX6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="DOy-RN-AKe"/>
                             <constraint firstItem="hvN-bG-RsJ" firstAttribute="top" secondItem="Zvh-3b-tGy" secondAttribute="bottom" constant="32" id="Xwm-vD-Tzh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8s8-ST-NX6" secondAttribute="trailing" constant="40.5" id="av6-q0-8wg"/>
+                            <constraint firstItem="yap-Vr-Fwa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kGV-3f-ZTS"/>
                             <constraint firstItem="hvN-bG-RsJ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="qbi-iP-FYr"/>
                             <constraint firstItem="Zvh-3b-tGy" firstAttribute="top" secondItem="8s8-ST-NX6" secondAttribute="bottom" constant="32.5" id="uIO-Ek-KhA"/>
                             <constraint firstItem="Zvh-3b-tGy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="uUx-qa-G33"/>
@@ -86,6 +96,7 @@
                     <connections>
                         <outlet property="actionButton" destination="hvN-bG-RsJ" id="My5-zf-33J"/>
                         <outlet property="cardsContainerCollectionview" destination="Zvh-3b-tGy" id="hCV-yW-ff9"/>
+                        <outlet property="gameOverLabel" destination="yap-Vr-Fwa" id="LQi-Ju-w3a"/>
                         <outlet property="scoreLabel" destination="p70-ca-Png" id="yDP-dI-zMg"/>
                         <outlet property="timeLabel" destination="E4n-Ls-kUk" id="AL6-1A-zAx"/>
                     </connections>
@@ -116,6 +127,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

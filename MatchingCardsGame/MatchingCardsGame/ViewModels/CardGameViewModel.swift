@@ -13,16 +13,18 @@ class CardGameViewModel {
     var cards: [CardViewModel]
     var firstSelectedCard: Int?
     var flipCardCallback: ((Int, Bool) -> Void)?
-    var updateCountdownLabelCallback:((TimeInterval) -> Void)?
-    var updateScoreCallback:((Int) -> Void)?
+    var updateCountdownLabelCallback: ((TimeInterval) -> Void)?
+    var updateScoreCallback: ((Int) -> Void)?
     var isCountdownRunning: Bool = false
     var countdownTimer: Timer?
     var correctStreak = 1 // will be used to count how many correct in a row there will be
+    var hasGameStarted = false
     var totalScore = 0 {
         didSet {
             updateScoreCallback?(totalScore)
         }
     }
+
     var remainingTime: TimeInterval = 60 {
         didSet {
             updateCountdownLabelCallback?(remainingTime)
@@ -88,8 +90,6 @@ class CardGameViewModel {
         }
     }
 
-    /** Restart game */
-
     /** Flip all the card that are not matched back */
     func flipAllUnmatchedCardsBack() {
         for cardIndice in cards.indices {
@@ -111,6 +111,7 @@ class CardGameViewModel {
             cardVM.isFaceUp = false
         }
 
+        firstSelectedCard = nil
         cards.shuffle()
     }
 
@@ -124,10 +125,24 @@ class CardGameViewModel {
         firstCardVM.isMatched = true
         secondCardVM.isMatched = true
         firstSelectedCard = nil
-        
+
         // add 2 points for each matched card, and multiply by streak
         totalScore += correctStreak * 2
         correctStreak += 1
+
+        // check if the deck is complete and shuffle again
+        checkCompleteAndShuffle()
+    }
+
+    /** All cards have been matched, continue game */
+    private func checkCompleteAndShuffle() {
+        // check if there
+        if cards.first(where: { $0.isMatched == false }) != nil { return }
+        
+        // increase the score
+        totalScore += 5
+        
+        resetAllCardsAndShuffle()
     }
 
     /** Not matching pair logic */
