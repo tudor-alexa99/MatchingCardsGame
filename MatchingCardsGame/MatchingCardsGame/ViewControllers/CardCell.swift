@@ -23,9 +23,9 @@ class CardCell: UICollectionViewCell {
 
     func configure(with viewModel: CardViewModel) {
         // if the card is face down, rotate the card backwords
-        cardBackView.isHidden = viewModel.card.isFaceUp
-        cardFrontView.isHidden = !viewModel.card.isFaceUp
-        
+        cardBackView.isHidden = viewModel.isFaceUp
+        cardFrontView.isHidden = !viewModel.isFaceUp
+        symbolImageView.image = UIImage(systemName: viewModel.imageName)
     }
 
     func animateRotation(isFaceUp: Bool) {
