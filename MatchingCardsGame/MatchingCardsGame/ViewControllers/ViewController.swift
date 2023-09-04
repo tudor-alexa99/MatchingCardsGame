@@ -47,20 +47,47 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         if !viewModel.hasGameStarted {
             actionButton.titleLabel?.text = "Start game"
         }
-        
+
         // hide the game over label
         gameOverLabel.isHidden = true
+
+        setupThemeSwitcher()
+    }
+
+    /** Create a switch theme button in the navigation bar */
+    func setupThemeSwitcher() {
+        let themeSwitcherButton = UIBarButtonItem(title: "Theme 🔮", style: .plain, target: self, action: #selector(switchThemeTapped))
+        
+        // Add it to the nav bar
+        navigationItem.rightBarButtonItem = themeSwitcherButton
     }
 
     // MARK: - Private
 
+    @objc private func switchThemeTapped() {
+        // go to the next theme
+        ThemeManager.shared.incrementToNextTheme()
+        
+        // Update the UI to reflect the new theme
+        updateUIForCurrentTheme()
+    }
+    
+    private func updateUIForCurrentTheme() {
+        // Retrieve the current theme from UserDefaults or any other source
+        let currentTheme = ThemeManager.shared.getCurrentTheme()
+
+        // Apply the theme to the UI components
+        navigationItem.title = currentTheme.title
+        
+        cardsContainerCollectionview.reloadData()
+    }
+    
     private func flipCardsOnDeckAnimation(index: Int, isFacingUp: Bool) {
         // get the index path for the cell that has to be flipped
         let indexPath = IndexPath(item: index, section: 0)
 
         // get the corresponding cell
         if let cell = cardsContainerCollectionview.cellForItem(at: indexPath) as? CardCell {
-            
             // redraw the cell and animate the rotation
             cell.configure(with: viewModel.cards[index])
             cell.animateRotation(isFaceUp: isFacingUp)
@@ -72,7 +99,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         viewModel.startCountdown()
         viewModel.hasGameStarted = true
         actionButton.setTitle("Reset Game", for: .normal)
-        
+
         // hide the game over label and show the grid
         gameOverLabel.isHidden = true
         cardsContainerCollectionview.isHidden = false
@@ -96,7 +123,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
         // show the user his final score
         gameOverLabel.text = "Game Over! Your final score is \(viewModel.totalScore)"
-        
+
         actionButton.setTitle("Restart Game", for: .normal)
     }
 
@@ -132,7 +159,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     /** When tapping a card in the deck */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard viewModel.hasGameStarted == true else { return }
-        
+
         // Get the selected cell
         if collectionView.cellForItem(at: indexPath) is CardCell {
             // get the corresponding view model

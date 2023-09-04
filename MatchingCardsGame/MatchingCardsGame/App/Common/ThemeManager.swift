@@ -11,9 +11,9 @@ class ThemeManager {
     // MARK: - Variables
 
     static let shared = ThemeManager()
-    
+
     var currentThemeIndex = 0
-    
+
     var themes: [Theme] = [
         Theme(title: "Default",
               cardColor: nil,
@@ -25,9 +25,18 @@ class ThemeManager {
         // check if there are any themes stored in UserDefaults and retreive them as well
         retrieveThemes()
     }
+
     // MARK: - Public
+
     func getCurrentTheme() -> Theme {
         return themes[currentThemeIndex]
+    }
+
+    func incrementToNextTheme() {
+        currentThemeIndex += 1
+        if currentThemeIndex == themes.count {
+            currentThemeIndex = 0
+        }
     }
 
     // MARK: - Private
