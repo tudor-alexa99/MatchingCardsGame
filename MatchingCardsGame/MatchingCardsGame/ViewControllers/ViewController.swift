@@ -60,7 +60,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
         // get the corresponding cell
         if let cell = cardsContainerCollectionview.cellForItem(at: indexPath) as? CardCell {
-            // Call the method on the cell
+            
+            // redraw the cell and animate the rotation
+            cell.configure(with: viewModel.cards[index])
             cell.animateRotation(isFaceUp: isFacingUp)
         }
     }
