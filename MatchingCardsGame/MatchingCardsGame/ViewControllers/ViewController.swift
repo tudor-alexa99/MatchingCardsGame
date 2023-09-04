@@ -67,9 +67,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             // get the corresponding view model
             let currentViewModel = self.viewModel.cards[indexPath.row]
             
+            // if the card is already matched, return
+            guard currentViewModel.card.isMatched == false else { return }
+            
             // Perform the flip animation
             cell.animateRotation(isFaceUp: currentViewModel.card.isFaceUp)
-            currentViewModel.card.isFaceUp.toggle()
+            viewModel.choose(card: currentViewModel)
         }
     }
 }
