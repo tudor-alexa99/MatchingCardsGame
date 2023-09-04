@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7EDCB7DE2AA681F400B2DF3C /* libStaticLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EDCB7DD2AA681F300B2DF3C /* libStaticLibrary.a */; };
 		7EF9B6142AA4FCCE0032FD7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF9B6132AA4FCCE0032FD7F /* AppDelegate.swift */; };
 		7EF9B6162AA4FCCE0032FD7F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF9B6152AA4FCCE0032FD7F /* SceneDelegate.swift */; };
 		7EF9B6182AA4FCCE0032FD7F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF9B6172AA4FCCE0032FD7F /* ViewController.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7EDCB7DD2AA681F300B2DF3C /* libStaticLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libStaticLibrary.a; path = MatchingCardsGame/StaticLibrary/libStaticLibrary.a; sourceTree = "<group>"; };
 		7EF9B6102AA4FCCE0032FD7F /* MatchingCardsGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchingCardsGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF9B6132AA4FCCE0032FD7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EF9B6152AA4FCCE0032FD7F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EDCB7DE2AA681F400B2DF3C /* libStaticLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +104,7 @@
 				7EF9B6292AA4FCD10032FD7F /* MatchingCardsGameTests */,
 				7EF9B6332AA4FCD10032FD7F /* MatchingCardsGameUITests */,
 				7EF9B6112AA4FCCE0032FD7F /* Products */,
+				7EF9B6722AA67B670032FD7F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -216,6 +220,14 @@
 				7EF9B6592AA65D8A0032FD7F /* Array+Int.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		7EF9B6722AA67B670032FD7F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EDCB7DD2AA681F300B2DF3C /* libStaticLibrary.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -550,10 +562,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/MatchingCardsGame/StaticLibrary";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tudorAlexa.MatchingCardsGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/MatchingCardsGame/StaticLibrary";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -579,10 +593,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/MatchingCardsGame/StaticLibrary";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tudorAlexa.MatchingCardsGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/MatchingCardsGame/StaticLibrary";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
