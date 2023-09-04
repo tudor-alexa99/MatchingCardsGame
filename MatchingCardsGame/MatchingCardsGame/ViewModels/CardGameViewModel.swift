@@ -19,6 +19,7 @@ class CardGameViewModel {
     var countdownTimer: Timer?
     var correctStreak = 1 // will be used to count how many correct in a row there will be
     var hasGameStarted = false
+    var currentTheme = ThemeManager.shared.getCurrentTheme()
     var totalScore = 0 {
         didSet {
             updateScoreCallback?(totalScore)
@@ -36,9 +37,12 @@ class CardGameViewModel {
     init() {
         cards = []
 
+        // create a list of pairs for the card symbols
+        let pairValues = Array.generatePairs(maximumNumberOfPairs: 4)
+
         // generate a new game of cards
         for i in 1 ... 8 {
-            cards.append(CardViewModel(card: Card(imageName: i % 2 == 0 ? "globe" : "phone", isFaceUp: false, isMatched: false)))
+            cards.append(CardViewModel(card: Card(), symbolValue: pairValues[i - 1]))
         }
     }
 
@@ -80,7 +84,7 @@ class CardGameViewModel {
         flipCardCallback?(cardIndex, false)
 
         // if 2 cards have been selected, check if they match
-        if firstCard.imageName == card.imageName {
+        if firstCard.symbolValue == card.symbolValue {
             matchingCards(firstCardVM: firstCard, secondCardVM: card)
         } else {
             firstSelectedCard = nil
@@ -138,10 +142,10 @@ class CardGameViewModel {
     private func checkCompleteAndShuffle() {
         // check if there
         if cards.first(where: { $0.isMatched == false }) != nil { return }
-        
+
         // increase the score
         totalScore += 5
-        
+
         resetAllCardsAndShuffle()
     }
 

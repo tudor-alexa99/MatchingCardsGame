@@ -10,7 +10,6 @@ import Foundation
 struct Card: Identifiable {
     var id = UUID()
     
-    var imageName: String
     var isFaceUp = false
     var isMatched = false
 }

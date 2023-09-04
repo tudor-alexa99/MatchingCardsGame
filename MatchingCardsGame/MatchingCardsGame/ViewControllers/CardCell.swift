@@ -12,7 +12,7 @@ class CardCell: UICollectionViewCell {
 
     @IBOutlet var cardBackView: UIView!
     @IBOutlet var cardFrontView: UIView!
-    @IBOutlet var symbolImageView: UIImageView!
+    @IBOutlet var symbolLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,14 +25,23 @@ class CardCell: UICollectionViewCell {
         // if the card is face down, rotate the card backwords
         cardBackView.isHidden = viewModel.isFaceUp
         cardFrontView.isHidden = !viewModel.isFaceUp
-        symbolImageView.image = UIImage(systemName: viewModel.imageName)
+        
+        let theme = ThemeManager.shared.getCurrentTheme()
+        
+        // set the symbol corresponding to the theme
+        symbolLabel.text = ThemeManager.shared.getCurrentTheme().getSymbol(at: viewModel.symbolValue)
+        
+        // if the theme has a custom color, set it
+        if theme.cardColor != nil {
+            cardBackView.backgroundColor = theme.cardColor?.toUIColor()
+        }
     }
 
     func animateRotation(isFaceUp: Bool) {
         // show both sides of the card
         cardBackView.isHidden = false
         cardFrontView.isHidden = false
-        
+
         // Check if the card is currently face up or face down
         let fromView = isFaceUp ? cardFrontView : cardBackView
         let toView = isFaceUp ? cardBackView : cardFrontView

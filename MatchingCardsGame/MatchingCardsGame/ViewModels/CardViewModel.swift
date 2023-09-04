@@ -10,18 +10,16 @@ import Foundation
 class CardViewModel: ObservableObject, Identifiable {
     var id = UUID()
     private var card: Card
+    var symbolValue: Int
 
-    init(card: Card) {
+    init(card: Card, symbolValue: Int) {
         self.card = card
+        self.symbolValue = symbolValue
     }
 
     var isFaceUp: Bool {
         get { return card.isFaceUp }
         set { card.isFaceUp = newValue }
-    }
-
-    var imageName: String {
-        return card.imageName
     }
 
     var isMatched: Bool {

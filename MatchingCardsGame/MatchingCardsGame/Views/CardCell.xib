@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -33,20 +34,23 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bsT-7M-isd">
                         <rect key="frame" x="0.0" y="0.0" width="80" height="120"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="globe.europe.africa.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="THO-d3-Kba">
-                                <rect key="frame" x="20" y="40.333333333333343" width="40" height="40.000000000000014"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😄" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VR3-oX-xEf">
+                                <rect key="frame" x="13" y="33" width="54" height="54"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="ois-I8-WG3"/>
-                                    <constraint firstAttribute="height" constant="41.329999999999998" id="xcv-GR-aBj"/>
+                                    <constraint firstAttribute="height" constant="54" id="FWW-UF-08b"/>
+                                    <constraint firstAttribute="width" constant="54" id="wFP-Rk-k54"/>
                                 </constraints>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                         <constraints>
-                            <constraint firstItem="THO-d3-Kba" firstAttribute="centerX" secondItem="bsT-7M-isd" secondAttribute="centerX" id="65f-8q-a03"/>
+                            <constraint firstItem="VR3-oX-xEf" firstAttribute="centerY" secondItem="bsT-7M-isd" secondAttribute="centerY" id="3Ti-uL-g7Q"/>
                             <constraint firstAttribute="height" constant="120" id="9dB-dA-C6d"/>
+                            <constraint firstItem="VR3-oX-xEf" firstAttribute="centerX" secondItem="bsT-7M-isd" secondAttribute="centerX" id="FCY-CV-9EN"/>
                             <constraint firstAttribute="width" constant="80" id="FfY-Vo-RQ9"/>
-                            <constraint firstItem="THO-d3-Kba" firstAttribute="centerY" secondItem="bsT-7M-isd" secondAttribute="centerY" id="eDK-rN-t5V"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -71,12 +75,14 @@
             <connections>
                 <outlet property="cardBackView" destination="ijN-Ub-cTh" id="euC-WI-kzf"/>
                 <outlet property="cardFrontView" destination="bsT-7M-isd" id="AsY-RE-SBT"/>
-                <outlet property="symbolImageView" destination="THO-d3-Kba" id="nLU-lS-B9U"/>
+                <outlet property="symbolLabel" destination="VR3-oX-xEf" id="4Mi-K2-H6u"/>
             </connections>
             <point key="canvasLocation" x="139.69465648854961" y="42.95774647887324"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="globe.europe.africa.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
