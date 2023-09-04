@@ -16,12 +16,21 @@ class CardCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        cardBackView.isHidden = false
+        cardFrontView.isHidden = false
         // TODO: Setup Z indexes on views
     }
 
     func configure(with viewModel: CardViewModel) {
-        // setup the view depending on the state of the view model
+        // if the card is face down, rotate the card backwords
+        if viewModel.card.isFaceUp {
+            cardBackView.layer.zPosition = 0
+            cardFrontView.layer.zPosition = 1
+        } else {
+            cardBackView.layer.zPosition = 1
+            cardFrontView.layer.zPosition = 0
+        }
+        
     }
 
     func animateRotation(isFaceUp: Bool) {

@@ -69,6 +69,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             
             // Perform the flip animation
             cell.animateRotation(isFaceUp: currentViewModel.card.isFaceUp)
+            currentViewModel.card.isFaceUp.toggle()
         }
     }
 }
