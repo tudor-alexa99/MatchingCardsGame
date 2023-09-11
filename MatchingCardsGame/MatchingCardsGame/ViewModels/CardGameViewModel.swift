@@ -88,8 +88,10 @@ class CardGameViewModel {
             matchingCards(firstCardVM: firstCard, secondCardVM: card)
         } else {
             firstSelectedCard = nil
-            DispatchQueue.main.async {
-                self.flipAllUnmatchedCardsBack()
+            
+            // this will happen aync for the animation to have time to show the second card first and then reverse
+            DispatchQueue.main.async { [weak self] in
+                self?.flipAllUnmatchedCardsBack()
             }
         }
     }
@@ -140,19 +142,13 @@ class CardGameViewModel {
 
     /** All cards have been matched, continue game */
     private func checkCompleteAndShuffle() {
-        // check if there
+        // check if there are no more unmatched cards
         if cards.first(where: { $0.isMatched == false }) != nil { return }
 
         // increase the score
         totalScore += 5
 
         resetAllCardsAndShuffle()
-    }
-
-    /** Not matching pair logic */
-    private func notMathcingCards() {
-        // flip the cards that do not match back and reset the selected one
-        firstSelectedCard = nil
     }
 
     // MARK: - Timer + Countdown
@@ -162,7 +158,7 @@ class CardGameViewModel {
         isCountdownRunning = true
 
         countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
-            guard let self = self else { return }
+            guard let self else { return }
 
             // decrease the time each second
             if self.remainingTime > 0 {

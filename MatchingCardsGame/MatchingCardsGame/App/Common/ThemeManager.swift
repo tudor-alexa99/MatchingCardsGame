@@ -49,7 +49,7 @@ class ThemeManager {
             let encodedThemes = try JSONEncoder().encode(themes)
             UserDefaults.standard.set(encodedThemes, forKey: "themesKey")
         } catch {
-            print("Error encoding themes: \(error)")
+            debugPrint("Error encoding themes: \(error)")
         }
     }
 
@@ -62,7 +62,7 @@ class ThemeManager {
                 self.themes.append(contentsOf: themes)
                 return
             } catch {
-                print("Error decoding stored themes: \(error)")
+                debugPrint("Error decoding stored themes: \(error)")
             }
         }
 
