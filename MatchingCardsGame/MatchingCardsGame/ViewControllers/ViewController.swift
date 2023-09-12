@@ -40,9 +40,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         cardsContainerCollectionview.register(UINib(nibName: "CardCell", bundle: nil), forCellWithReuseIdentifier: "CardCell")
 
         // setup the callback handles
-        viewModel.flipCardCallback = flipCardsOnDeckAnimation
-        viewModel.updateCountdownLabelCallback = updateCountdownLabel
-        viewModel.updateScoreCallback = updateScoreLabel
+        viewModel.flipCardCallback = { [weak self] cardIndex, isFaceUp in
+            self?.flipCardsOnDeckAnimation(index: cardIndex, isFacingUp: isFaceUp)
+        }
+        
+        viewModel.updateCountdownLabelCallback = { [weak self] timeINterval in
+            self?.updateCountdownLabel(with: timeINterval)
+        }
+        viewModel.updateScoreCallback = { [weak self] score in
+            self?.updateScoreLabel(with: score)
+        }
 
         if !viewModel.hasGameStarted {
             actionButton.titleLabel?.text = "Start game"
